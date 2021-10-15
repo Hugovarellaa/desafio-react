@@ -25,7 +25,6 @@ createServer({
           amount: 1100,
           createAt: new Date("2021-02-15 19:00:00"),
         },
-
       ],
     });
   },
