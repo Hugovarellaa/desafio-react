@@ -42,7 +42,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 
 - Inicie o servidor com Json-server `yarn server`;
- - A aplicação pode ser acessada em [`localhost:4000`](http://localhost:3333).
+ - A aplicação pode ser acessada em [`localhost:3333`](http://localhost:3333).
 
 
 - Inicie o servidor com `yarn dev`;
