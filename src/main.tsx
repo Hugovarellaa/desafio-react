@@ -7,8 +7,7 @@ createServer({
   models: {
     transaction: Model,
   },
-
-  seeds(server){
+  seeds(server) {
     server.db.loadData({
       transactions: [
         {
@@ -17,7 +16,7 @@ createServer({
           type: "deposit",
           category: "Dev",
           amount: 6000,
-          createAt: new Date("2021-02-11 09:00:00")
+          createAt: new Date("2021-02-11 09:00:00"),
         },
         {
           id: 2,
@@ -25,17 +24,17 @@ createServer({
           type: "withdraw",
           category: "Comida",
           amount: 100,
-          createAt: new Date("2021-02-13 22:00:00")
-        }
-      ]
-    })
+          createAt: new Date("2021-02-13 22:00:00"),
+        },
+      ],
+    });
   },
 
   routes() {
     this.namespace = "api";
 
     this.get("/transactions", (resquest, response) => {
-      return this.schema.all("transaction")
+      return this.schema.all("transaction");
     });
     this.post("/transactions", (schema, request) => {
       const data = JSON.parse(request.requestBody);

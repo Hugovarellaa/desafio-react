@@ -2,8 +2,30 @@ import { Container } from "./styles";
 import incomeImg from "../../images/income.svg";
 import outcomeImg from "../../images/outcome.svg";
 import totalImg from "../../images/total.svg";
+import { useContext } from "react";
+import { TransactionContext } from "../../hooks/useTransactionContext";
 
 export function Summary() {
+  const { transactions } = useContext(TransactionContext);
+
+  const summary = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === "deposit") {
+        acc.deposits += transaction.amount;
+        acc.totals += transaction.amount;
+      } else {
+        acc.withdraws += transaction.amount;
+        acc.totals -= transaction.amount;
+      }
+      return acc;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      totals: 0,
+    }
+  );
+
   return (
     <Container>
       <div>
@@ -11,7 +33,12 @@ export function Summary() {
           <p>Entradas</p>
           <img src={incomeImg} alt="Entradas" />
         </header>
-        <strong>R$ 1500,00</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.deposits)}
+        </strong>
       </div>
 
       <div>
@@ -19,7 +46,13 @@ export function Summary() {
           <p>Saídas</p>
           <img src={outcomeImg} alt="Saídas" />
         </header>
-        <strong>-R$ 900,00</strong>
+        <strong>
+          -
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.withdraws)}
+        </strong>
       </div>
 
       <div>
@@ -27,7 +60,12 @@ export function Summary() {
           <p>Total</p>
           <img src={totalImg} alt="Entradas" />
         </header>
-        <strong>R$ 600,00</strong>
+        <strong>
+          {new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          }).format(summary.totals)}
+        </strong>
       </div>
     </Container>
   );
